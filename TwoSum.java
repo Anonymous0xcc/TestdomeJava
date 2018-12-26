@@ -12,22 +12,25 @@
  	-code takes too long to answer when array has large # of elements
  */
 package TwoSum;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TwoSum {
     public static int[] findTwoSum(int[] list, int sum) {
-        int listLength=list.length;
-        int[] match=new int[2];
-        
-        for(int i=0; i<listLength; i++){
-        	for(int j=i+1; j<listLength; j++){
-        		if(list[i]+list[j]==sum){
-        			match[0]=i;
-        			match[1]=j;
-        			return match;
-        		}
-        	}
+        if (list == null || list.length < 2) return null;
+    //map values to indexes
+    Map<Integer, Integer> indexMap = new HashMap<>();
+    for (int i = 0; i < list.length; i++) {
+        int needed = sum - list[i];
+        if (indexMap.get(needed) != null) {
+            return new int[]{i, indexMap.get(needed)};
         }
-        return null;	//yes this results in an exception, but it's what specification said to do
+
+        indexMap.put(list[i], i);
+    }
+
+    //none found
+    return null;
     }
 
     public static void main(String[] args) {
