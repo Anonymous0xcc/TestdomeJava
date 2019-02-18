@@ -18,42 +18,30 @@
 package by.naxa.testdome;
 
 public class UserInput {
-	private static String value;	//current value
-    public static class TextInput {
 
-    	public TextInput(){
-    		value= new String();
-    	}
-    	public void add(char c){
-    		
-    		if(value.length()==0){
-    			value=Character.toString(c);
-    		}else{
-    			value+=c;
-    		}
-    		
-    	}
-    	public String getValue(){
-    		return value;
-    	}
-    	
-    }
+	public static class TextInput {
+		// current value
+		private final StringBuilder sb = new StringBuilder();
 
-    public static class NumericInput extends TextInput {
-    	@Override
-    	public void add(char c){
-    		if(Character.isDigit(c)){
-    			//if character is numeric
-    			if(value.length()==0){
-        			value=Character.toString(c);
-        		}else{
-        			value+=c;
-        		}
-    		}
-    	}
-    }
+		public void add(final char ch) {
+			sb.append(ch);
+		}
 
-    public static void main(String[] args) {
+		public String getValue() {
+			return sb.toString();
+		}
+	}
+
+	public static class NumericInput extends TextInput {
+	    // The Override annotation is used to check if a function is overriding a parent function.
+		@Override
+		public void add(final char ch) {
+			if (Character.isDigit(ch))
+				super.add(ch);
+		}
+	}
+
+	public static void main(String[] args) {
         TextInput input = new NumericInput();
         input.add('1');
         input.add('a');
