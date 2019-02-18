@@ -17,9 +17,9 @@ import java.util.Map;
 
 public class TwoSum {
     public static int[] findTwoSum(int[] list, int sum) {
-        if (list == null || list.length < 2) return null;
+        if (list == null || list.length < 2 || sum < 1) return null;
         //map values to indexes
-        Map<Integer, Integer> indexMap = new HashMap<>();
+        final Map<Integer, Integer> indexMap = new HashMap<>();
         for (int i = 0; i < list.length; i++) {
             int needed = sum - list[i];
             if (indexMap.get(needed) != null) {
@@ -30,12 +30,13 @@ public class TwoSum {
         }
 
         //none found
-        //yes this results in an exception, but it's what specification said to do
         return null;
     }
 
     public static void main(String[] args) {
         int[] indices = findTwoSum(new int[]{1, 3, 5, 7, 9}, 10);
-        System.out.println(indices[0] + " " + indices[1]);
+        if (indices != null) {
+            System.out.println(indices[0] + " " + indices[1]);
+        }
     }
 }
