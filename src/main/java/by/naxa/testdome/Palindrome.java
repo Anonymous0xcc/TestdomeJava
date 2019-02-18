@@ -12,12 +12,11 @@ package by.naxa.testdome;
 
 public class Palindrome {
     public static boolean isPalindrome(String word) {
-        int stringLength=word.length();
-        for(int i=0; i<stringLength; i++){
-        	if(Character.toLowerCase(word.charAt(i))!=Character.toLowerCase(word.charAt(stringLength-i-1))){
-        		return false;
-        	}
-        }
+        final String lcaseWord = word.toLowerCase();
+        final int l = word.length();
+        for (int i = 0; i < l; ++i)
+            if (lcaseWord.charAt(i) != lcaseWord.charAt(l-i-1))
+                return false;
         return true;
     }
     
